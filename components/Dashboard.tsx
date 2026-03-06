@@ -1,158 +1,180 @@
 import React, { useEffect, useState } from 'react';
-import { motion, Variants } from 'framer-motion';
+import { motion, Variants, AnimatePresence } from 'framer-motion';
 import { RESUME } from '../constants';
-import { Github, Linkedin } from 'lucide-react';
+import { Github, Linkedin, MapPin, Zap, Trophy, Layers } from 'lucide-react';
+import { PixelCharacter } from './PixelCharacter';
 
 interface DashboardProps {
   onIntroComplete?: () => void;
 }
 
+const ROLES = [
+  "Machine Learning Enthusiast",
+  "Full Stack Developer",
+  "Technomancer",
+];
+
+const STAT_BADGES = [
+  { icon: Zap,    label: 'LVL',      value: '21',   color: '#10b981' },
+  { icon: Trophy, label: 'CGPA',     value: '8.76', color: '#facc15' },
+  { icon: Layers, label: 'PROJECTS', value: '8+',   color: '#8b5cf6' },
+  { icon: MapPin, label: 'BASE',     value: 'BLR',  color: '#06b6d4' },
+];
+
 export const Dashboard: React.FC<DashboardProps> = ({ onIntroComplete }) => {
-  const name = "Shreeya Srinivas Methuku";
+  const name     = "Shreeya Srinivas Methuku";
   const greeting = "Hi, I'm";
-  
+
   const [displayedGreeting, setDisplayedGreeting] = useState("");
-  const [displayedName, setDisplayedName] = useState("");
-  const [isTypingName, setIsTypingName] = useState(false);
-  const [showCursor, setShowCursor] = useState(true);
+  const [displayedName, setDisplayedName]         = useState("");
+  const [isTypingName, setIsTypingName]           = useState(false);
+  const [showCursor, setShowCursor]               = useState(true);
+  const [roleIdx, setRoleIdx]                     = useState(0);
 
-  // Typing effect logic
+  // Typing effect
   useEffect(() => {
-    // 1. Type Greeting
     if (displayedGreeting.length < greeting.length) {
-      const timeout = setTimeout(() => {
-        setDisplayedGreeting(greeting.slice(0, displayedGreeting.length + 1));
-      }, 50);
-      return () => clearTimeout(timeout);
-    } 
-    
-    // 2. Start Typing Name after greeting
+      const t = setTimeout(() => setDisplayedGreeting(greeting.slice(0, displayedGreeting.length + 1)), 48);
+      return () => clearTimeout(t);
+    }
     if (!isTypingName) {
-      const timeout = setTimeout(() => setIsTypingName(true), 300);
-      return () => clearTimeout(timeout);
+      const t = setTimeout(() => setIsTypingName(true), 280);
+      return () => clearTimeout(t);
     }
-
-    // 3. Type Name
     if (isTypingName && displayedName.length < name.length) {
-      const timeout = setTimeout(() => {
-        setDisplayedName(name.slice(0, displayedName.length + 1));
-      }, 70); // Slightly slower for the name for emphasis
-      return () => clearTimeout(timeout);
+      const t = setTimeout(() => setDisplayedName(name.slice(0, displayedName.length + 1)), 65);
+      return () => clearTimeout(t);
     }
-
-    // 4. Complete
-    if (isTypingName && displayedName.length === name.length) {
-       // Trigger parent callback to reveal the rest of the site
-       if (onIntroComplete) {
-         const timeout = setTimeout(() => onIntroComplete(), 500);
-         return () => clearTimeout(timeout);
-       }
+    if (isTypingName && displayedName.length === name.length && onIntroComplete) {
+      const t = setTimeout(() => onIntroComplete(), 450);
+      return () => clearTimeout(t);
     }
   }, [displayedGreeting, displayedName, isTypingName, onIntroComplete]);
 
-  // Cursor blink effect
+  // Cursor blink
   useEffect(() => {
-    const interval = setInterval(() => {
-      setShowCursor(prev => !prev);
-    }, 500);
-    return () => clearInterval(interval);
+    const iv = setInterval(() => setShowCursor(p => !p), 500);
+    return () => clearInterval(iv);
   }, []);
 
-  // Fade up animation for blocks that appear AFTER typing
-  const fadeUp: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: (customDelay: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: { delay: customDelay, duration: 0.8, ease: "easeOut" }
-    })
-  };
+  // Role cycling
+  useEffect(() => {
+    const iv = setInterval(() => setRoleIdx(p => (p + 1) % ROLES.length), 2600);
+    return () => clearInterval(iv);
+  }, []);
 
   const isTypingComplete = displayedName.length === name.length;
 
+  const fadeUp: Variants = {
+    hidden:  { opacity: 0, y: 24 },
+    visible: (d: number) => ({ opacity: 1, y: 0, transition: { delay: d, duration: 0.7, ease: 'easeOut' } }),
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center w-full min-h-[calc(100vh-100px)] text-center relative z-20">
-      
-      {/* Content Wrapper: Centered in screen, text aligned center inside */}
-      <div className="relative z-20 flex flex-col items-center w-full max-w-5xl px-4 md:px-8">
-            {/* Greeting */}
-            <div className="mb-2 h-10 md:h-14">
-               <h2 className="text-3xl md:text-5xl text-cyber-primary font-bold font-mono">
-                {displayedGreeting}
-               </h2>
-            </div>
-            
-            {/* Name with Cursor */}
-            <div className="mb-10 min-h-[4rem] md:min-h-[6rem] flex items-center justify-center w-full">
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-mono font-bold text-white tracking-normal leading-none drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
-                  {displayedName}
-                </h1>
-                <motion.div 
-                  animate={{ opacity: showCursor ? 1 : 0 }}
-                  transition={{ duration: 0.1 }}
-                  className="w-2 md:w-4 h-10 md:h-20 bg-cyber-primary ml-2 inline-block shadow-[0_0_10px_#10b981]"
-                />
-            </div>
+    <div className="flex items-start justify-center w-full min-h-[calc(100vh-100px)] relative z-20 pt-16 md:pt-20">
+      <div className="relative z-20 flex flex-col lg:flex-row items-center gap-8 lg:gap-16 w-full max-w-6xl px-4 md:px-8">
 
-            {/* Elements that fade in AFTER typing is complete */}
-            {isTypingComplete && (
-              <>
-                {/* Role */}
-                <motion.h3
-                  variants={fadeUp}
-                  initial="hidden"
-                  animate="visible"
-                  custom={0.2} 
-                  className="text-2xl md:text-3xl text-cyber-accent font-bold tracking-wide mb-8 font-mono"
-                >
-                    Machine Learning Enthusiast & Full Stack Developer
-                </motion.h3>
-                    
-                {/* Description */}
-                <motion.div
-                  variants={fadeUp}
-                  initial="hidden"
-                  animate="visible"
-                  custom={0.5} 
-                  className="space-y-4 mb-12 font-sans max-w-2xl"
-                >
-                  <p className="text-gray-100 text-2xl md:text-3xl font-light">
-                    I love building stuff that makes a difference.
-                  </p>
-                  <p className="text-gray-400 text-xl italic font-mono">
-                    From AI models that think to apps that work — I'm all about turning ideas into reality.
-                  </p>
-                </motion.div>
+        {/* ── Left: text ── */}
+        <div className="flex flex-col items-center lg:items-start text-center lg:text-left flex-1 min-w-0">
 
-                {/* Social Actions */}
-                <motion.div
-                  variants={fadeUp}
-                  initial="hidden"
-                  animate="visible"
-                  custom={0.8} 
-                  className="relative z-[80] mb-16" // High z-index to sit above overlays
+          <div className="mb-2 h-10 md:h-14">
+            <h2 className="text-3xl md:text-5xl text-cyber-primary font-bold font-mono tracking-wider">
+              {displayedGreeting}
+            </h2>
+          </div>
+
+          <div className="mb-8 min-h-[4rem] md:min-h-[6rem] flex items-center w-full justify-center lg:justify-start">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-mono font-bold text-white tracking-tight leading-none drop-shadow-[0_0_20px_rgba(255,255,255,0.25)]">
+              {displayedName}
+            </h1>
+            <motion.div
+              animate={{ opacity: showCursor ? 1 : 0 }}
+              transition={{ duration: 0.1 }}
+              className="w-2 md:w-3 h-10 md:h-16 bg-cyber-primary ml-2 inline-block shadow-[0_0_12px_#10b981] flex-shrink-0"
+            />
+          </div>
+
+          {isTypingComplete && (
+            <>
+              <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.1}
+                className="mb-6 h-10 flex items-center justify-center lg:justify-start"
+              >
+                <AnimatePresence mode="wait">
+                  <motion.h3
+                    key={roleIdx}
+                    initial={{ opacity: 0, y: 12, filter: 'blur(4px)' }}
+                    animate={{ opacity: 1, y: 0,  filter: 'blur(0px)' }}
+                    exit={  { opacity: 0, y: -12, filter: 'blur(4px)' }}
+                    transition={{ duration: 0.4 }}
+                    className="text-xl md:text-2xl font-mono font-bold tracking-widest"
+                    style={{ color: '#06b6d4' }}
+                  >
+                    &gt; {ROLES[roleIdx]}
+                  </motion.h3>
+                </AnimatePresence>
+              </motion.div>
+
+
+              <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.5}
+                className="space-y-3 mb-10 max-w-xl"
+              >
+                <p className="text-gray-100 text-xl md:text-2xl font-light leading-relaxed">
+                  I love building stuff that makes a difference.
+                </p>
+                <p className="text-gray-400 text-base md:text-lg font-mono leading-relaxed italic">
+                  From AI models that think to apps that work —{' '}
+                  I'm all about turning ideas into reality.
+                </p>
+              </motion.div>
+
+              <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.75}
+                className="relative z-[80] flex flex-wrap justify-center lg:justify-start gap-4 font-mono"
+              >
+                <motion.a href={`https://${RESUME.profile.linkedin}`} target="_blank" rel="noreferrer"
+                  whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+                  className="relative flex items-center gap-2 overflow-hidden bg-cyber-secondary/10 text-cyber-secondary px-7 py-3 rounded border border-cyber-secondary/50 hover:bg-cyber-secondary/20 hover:shadow-[0_0_24px_rgba(139,92,246,0.4)] transition-all text-sm tracking-wider"
                 >
-                    <div className="flex flex-wrap justify-center gap-6 font-mono">
-                        <a 
-                            href={`https://${RESUME.profile.linkedin}`} 
-                            target="_blank" 
-                            rel="noreferrer" 
-                            className="relative flex items-center gap-2 bg-transparent text-cyber-secondary px-8 py-4 rounded border border-cyber-secondary hover:bg-cyber-secondary/20 hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] transition-all transform hover:-translate-y-1"
-                        >
-                            <Linkedin size={20} /> LINKEDIN
-                        </a>
-                        <a 
-                            href="https://github.com/shreeya-methuku" 
-                            target="_blank" 
-                            rel="noreferrer" 
-                            className="relative flex items-center gap-2 bg-gray-800 text-white px-8 py-4 rounded border border-gray-600 hover:bg-gray-700 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all transform hover:-translate-y-1"
-                        >
-                            <Github size={20} /> GITHUB
-                        </a>
-                    </div>
-                </motion.div>
-              </>
-            )}
+                  <div className="absolute inset-0 -translate-x-full hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-cyber-secondary/10 to-transparent" />
+                  <Linkedin size={16} /> LINKEDIN
+                </motion.a>
+                <motion.a href="https://github.com/shreeya-methuku" target="_blank" rel="noreferrer"
+                  whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+                  className="relative flex items-center gap-2 overflow-hidden bg-gray-800/80 text-white px-7 py-3 rounded border border-gray-600 hover:bg-gray-700 hover:shadow-[0_0_24px_rgba(255,255,255,0.15)] transition-all text-sm tracking-wider"
+                >
+                  <div className="absolute inset-0 -translate-x-full hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+                  <Github size={16} /> GITHUB
+                </motion.a>
+                <motion.a href="https://mail.google.com/mail/?view=cm&to=ft.shreeyyymethuku@gmail.com" target="_blank" rel="noreferrer"
+                  whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+                  className="relative flex items-center gap-2 overflow-hidden bg-cyber-primary/10 text-cyber-primary px-7 py-3 rounded border border-cyber-primary/50 hover:bg-cyber-primary/20 hover:shadow-[0_0_24px_rgba(16,185,129,0.4)] transition-all text-sm tracking-wider"
+                >
+                  <div className="absolute inset-0 -translate-x-full hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-cyber-primary/10 to-transparent" />
+                  ✉ CONTACT
+                </motion.a>
+              </motion.div>
+
+            </>
+          )}
+        </div>
+
+        {/* ── Right: character ── */}
+        <motion.div
+          initial={{ opacity: 0, x: 40, scale: 0.9 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          transition={{ duration: 0.9, ease: 'easeOut' }}
+          className="flex-shrink-0 flex items-center justify-center"
+          style={{ filter: 'drop-shadow(0 0 40px rgba(34,197,94,0.25))', overflow: 'visible' }}
+        >
+          <div style={{ transform: 'scale(0.72)', transformOrigin: 'center center' }}
+               className="hidden lg:block">
+            <PixelCharacter />
+          </div>
+          <div style={{ transform: 'scale(0.55)', transformOrigin: 'center center' }}
+               className="block lg:hidden">
+            <PixelCharacter />
+          </div>
+        </motion.div>
+
       </div>
     </div>
   );

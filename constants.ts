@@ -15,7 +15,7 @@ export const RESUME: ResumeData = {
     {
       school: "PES University",
       degree: "B.Tech in CS (AI & ML)",
-      score: "CGPA: 8.63",
+      score: "CGPA: 8.76",
       period: "08/2023 – Present",
       details: "CNR Scholarship Awardee. Coursework: DSA, Web Tech, Computer Networks, OS, Advanced ML, Databases."
     },
@@ -92,6 +92,14 @@ export const RESUME: ResumeData = {
   ],
   projects: [
     {
+      name: "MOODIFY",
+      description: "Web platform recommending content based on user mood with animated questionnaires.",
+      stack: "HTML, CSS, JS, Spotify API",
+      period: "09/2024 – 10/2024",
+      link: "https://moodify-gray.vercel.app/",
+      featured: true
+    },
+    {
       name: "Sleep Staging from Raw EEG",
       description: "Real-time sleep-staging model using causal convolutional neural networks on single channel EEG data.",
       stack: "Python, Causal Inference, Deep Learning",
@@ -112,7 +120,7 @@ export const RESUME: ResumeData = {
       stack: "GRU-D, PARAFAC2, Python",
       period: "08/2025 – 10/2025",
       link: "https://github.com/orgs/MINIONS-AFML/repositories",
-      featured: true
+      featured: false
     },
     {
       name: "Zoho Chat Automation",
@@ -128,14 +136,6 @@ export const RESUME: ResumeData = {
       stack: "TensorFlow, PyTorch, MLflow",
       period: "05/2024 – 07/2024",
       link: "https://github.com/shreeya-methuku/ModelForge",
-      featured: false
-    },
-    {
-      name: "MOODIFY",
-      description: "Web platform recommending content based on user mood with animated questionnaires.",
-      stack: "HTML, CSS, JS, Spotify API",
-      period: "09/2024 – 10/2024",
-      link: "https://github.com/shreeya-methuku/Moodify",
       featured: false
     },
     {

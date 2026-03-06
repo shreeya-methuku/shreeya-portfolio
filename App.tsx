@@ -7,11 +7,12 @@ import { QuestLog } from './components/QuestLog';
 import { Inventory } from './components/Inventory';
 import { Education, Awards } from './components/Archives';
 import { Background3D } from './components/Background3D';
+import { BackgroundMusic } from './components/BackgroundMusic';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const App: React.FC = () => {
   const [bootComplete, setBootComplete] = useState(false);
-  const [introFinished, setIntroFinished] = useState(false); // Controls when main page reveals
+  const [introFinished, setIntroFinished] = useState(false);
   const [activeSection, setActiveSection] = useState('dashboard');
 
   const handleBootComplete = () => {
@@ -57,13 +58,13 @@ const App: React.FC = () => {
       {/* Scanline Animation */}
       <div className="fixed inset-0 z-[60] pointer-events-none opacity-[0.03] bg-gradient-to-b from-transparent via-white to-transparent h-1 w-full animate-scanline"></div>
 
-      <AnimatePresence>
-        {!bootComplete && (
-          <BootSequence onComplete={handleBootComplete} />
-        )}
-      </AnimatePresence>
+      {/* Ambient music toggle — always present */}
+      <BackgroundMusic />
 
-      {/* Main Content */}
+      {/* BootSequence handles its own exit animation and calls onComplete only after fully invisible */}
+      {!bootComplete && <BootSequence onComplete={handleBootComplete} />}
+
+      {/* Main Content — renders only after BootSequence has fully faded out */}
       {bootComplete && (
         <>
           {/* Navigation - Fades in only after intro is finished */}

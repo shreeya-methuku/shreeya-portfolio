@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
     <title>Shreeya S Methuku</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -28,11 +29,17 @@
             animation: {
               'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
               'scanline': 'scanline 8s linear infinite',
+              'float': 'float 4s ease-in-out infinite',
+              'float-slow': 'float 6s ease-in-out infinite',
             },
             keyframes: {
               scanline: {
                 '0%': { transform: 'translateY(-100%)' },
                 '100%': { transform: 'translateY(100%)' }
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0px)' },
+                '50%': { transform: 'translateY(-8px)' }
               }
             }
           }
@@ -43,35 +50,61 @@
       body {
         background-color: #050505;
         color: #e2e8f0;
-        overflow-x: hidden; /* Only hide horizontal overflow */
+        overflow-x: hidden;
       }
+
       /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #0a0f14; 
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #1e293b; 
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #10b981; 
-      }
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: #050505; }
+      ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+      ::-webkit-scrollbar-thumb:hover { background: #10b981; }
+
+      /* CRT scanline overlay */
       .crt-overlay {
         background: linear-gradient(
-          rgba(18, 16, 16, 0) 50%, 
-          rgba(0, 0, 0, 0.25) 50%
+          rgba(18, 16, 16, 0) 50%,
+          rgba(0, 0, 0, 0.18) 50%
         ), linear-gradient(
-          90deg, 
-          rgba(255, 0, 0, 0.06), 
-          rgba(0, 255, 0, 0.02), 
-          rgba(0, 0, 255, 0.06)
+          90deg,
+          rgba(255, 0, 0, 0.04),
+          rgba(0, 255, 0, 0.01),
+          rgba(0, 0, 255, 0.04)
         );
         background-size: 100% 2px, 3px 100%;
         pointer-events: none;
       }
+
+      /* Radial glow for boot screen centre */
+      .bg-radial-glow {
+        background: radial-gradient(ellipse at 50% 50%, rgba(16,185,129,0.06) 0%, transparent 65%);
+      }
+
+      /* Shimmer keyframe for skill bars */
+      @keyframes shimmer {
+        0%   { transform: translateX(-100%); }
+        100% { transform: translateX(200%); }
+      }
+
+      /* Smooth font rendering */
+      * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+      /* Selection */
+      ::selection { background: #10b981; color: #000; }
+
+      /* No scrollbar utility */
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+      /* 3D perspective preserve for nested elements */
+      .preserve-3d { transform-style: preserve-3d; }
+
+      /* Floating animation for decorative elements */
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50%       { transform: translateY(-8px); }
+      }
+      .animate-float { animation: float 4s ease-in-out infinite; }
+      .animate-float-slow { animation: float 6s ease-in-out infinite; }
     </style>
   <script type="importmap">
 {
