@@ -22,7 +22,7 @@ const STAT_BADGES = [
 ];
 
 export const Dashboard: React.FC<DashboardProps> = ({ onIntroComplete }) => {
-  const name     = "Shreeya Srinivas Methuku";
+  const name     = "Shreeya Methuku";
   const greeting = "Hi, I'm";
 
   const [displayedGreeting, setDisplayedGreeting] = useState("");
@@ -72,7 +72,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onIntroComplete }) => {
 
   return (
     <div className="flex items-start justify-center w-full min-h-[calc(100vh-100px)] relative z-20 pt-16 md:pt-20">
-      <div className="relative z-20 flex flex-col lg:flex-row items-center gap-8 lg:gap-16 w-full max-w-6xl px-4 md:px-8">
+      <div className="relative z-20 flex flex-col lg:flex-row items-start gap-8 lg:gap-16 w-full max-w-6xl px-4 md:px-8">
 
         {/* ── Left: text ── */}
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left flex-1 min-w-0">
