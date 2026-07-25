@@ -3,12 +3,11 @@ import { motion } from 'framer-motion';
 import { RESUME } from '../constants';
 import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
 
-// Stable, deterministic skill values — no re-render flicker
 const SKILL_VALUES: Record<string, number> = {
-  Python: 96, C: 82, 'C++': 80, Java: 78, JavaScript: 88, SQL: 85,
-  'React.js': 90, 'Node.js': 85, 'Express.js': 82, TypeScript: 84, 'Tailwind CSS': 92, 'HTML/CSS': 93,
-  TensorFlow: 88, PyTorch: 86, 'Scikit-learn': 92, Pandas: 94, NumPy: 93, OpenCV: 78, 'Deep Learning': 87, 'LLMs (RAG)': 85,
-  Firebase: 80, Git: 90, MLflow: 78, LangChain: 82, LLaMaIndex: 78, ROS: 70,
+  Python: 96, 'C++': 88, C: 82, Java: 78, Go: 85, 'JavaScript/TypeScript': 90, SQL: 88,
+  Flask: 84, 'Node.js': 85, 'Express.js': 82, 'REST APIs': 90, PostgreSQL: 84, AWS: 82, Snowflake: 80, Docker: 82, Kubernetes: 78, Git: 92, 'CI/CD': 84,
+  'React.js': 90, 'Next.js': 84, TypeScript: 88, 'Tailwind CSS': 92, 'HTML/CSS': 93,
+  PyTorch: 86, TensorFlow: 88, 'Scikit-learn': 92, XGBoost: 88, NLP: 84, 'Generative AI': 86, RAG: 85, LangChain: 82,
 };
 
 const getSkillValue = (name: string, idx: number): number => {
@@ -46,12 +45,12 @@ const SkillBar: React.FC<SkillBarProps> = ({ name, value, color, delay }) => (
 );
 
 const attributeData = [
-  { subject: 'Coding', A: 95, fullMark: 100 },
-  { subject: 'AI / ML', A: 98, fullMark: 100 },
+  { subject: 'Systems', A: 92, fullMark: 100 },
+  { subject: 'AI / ML', A: 90, fullMark: 100 },
+  { subject: 'Backend', A: 94, fullMark: 100 },
+  { subject: 'Frontend', A: 88, fullMark: 100 },
   { subject: 'Leadership', A: 90, fullMark: 100 },
-  { subject: 'Sales', A: 85, fullMark: 100 },
-  { subject: 'Strategy', A: 85, fullMark: 100 },
-  { subject: 'Communication', A: 92, fullMark: 100 },
+  { subject: 'Data Eng', A: 88, fullMark: 100 },
 ];
 
 export const Stats: React.FC = () => {

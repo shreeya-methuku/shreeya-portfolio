@@ -4,14 +4,22 @@ import { RESUME } from '../constants';
 import { Code, ExternalLink, Cpu } from 'lucide-react';
 
 const PROJECT_IMAGES = [
-  "https://images.unsplash.com/photo-1576091160550-2187d80a18f7?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?q=80&w=1000&auto=format&fit=crop",
+  // KeystoneDB — storage engine / server hardware
+  "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1000&auto=format&fit=crop",
+  // RaftKV — distributed systems / network
+  "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop",
+  // CacheWire — circuits / performance
+  "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1000&auto=format&fit=crop",
+  // Yojna-Setu — AI / voice assistant
   "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop",
+  // POS Simulator — code / development
   "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop",
+  // Sleep Staging — brain / science
+  "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?q=80&w=1000&auto=format&fit=crop",
+  // Urban Crime — city skyline
+  "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=1000&auto=format&fit=crop",
+  // MOODIFY — music
   "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1000&auto=format&fit=crop",
 ];
 
 interface TiltCardProps {

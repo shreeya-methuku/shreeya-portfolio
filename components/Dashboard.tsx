@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, Variants, AnimatePresence } from 'framer-motion';
 import { RESUME } from '../constants';
-import { Github, Linkedin, MapPin, Zap, Trophy, Layers } from 'lucide-react';
+import { Github, Linkedin, MapPin, Zap, Trophy, Layers, FileText } from 'lucide-react';
 import { PixelCharacter } from './PixelCharacter';
 
 interface DashboardProps {
@@ -9,14 +9,17 @@ interface DashboardProps {
 }
 
 const ROLES = [
+  "Software Developer",
   "Machine Learning Enthusiast",
+  "Aspiring Systems Engineer",
+  "Data Engineering Enthusiast",
   "Full Stack Developer",
   "Technomancer",
 ];
 
 const STAT_BADGES = [
   { icon: Zap,    label: 'LVL',      value: '21',   color: '#10b981' },
-  { icon: Trophy, label: 'CGPA',     value: '8.76', color: '#facc15' },
+  { icon: Trophy, label: 'CGPA',     value: '8.80', color: '#facc15' },
   { icon: Layers, label: 'PROJECTS', value: '8+',   color: '#8b5cf6' },
   { icon: MapPin, label: 'BASE',     value: 'BLR',  color: '#06b6d4' },
 ];
@@ -118,11 +121,9 @@ export const Dashboard: React.FC<DashboardProps> = ({ onIntroComplete }) => {
               <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.5}
                 className="space-y-3 mb-10 max-w-xl"
               >
-                <p className="text-gray-100 text-xl md:text-2xl font-light leading-relaxed">
-                  I love building stuff that makes a difference.
-                </p>
                 <p className="text-gray-400 text-base md:text-lg font-mono leading-relaxed italic">
-                  From AI models that think to apps that work —{' '}
+                  From distributed systems to data pipelines,
+                  <br />
                   I'm all about turning ideas into reality.
                 </p>
               </motion.div>
@@ -137,12 +138,19 @@ export const Dashboard: React.FC<DashboardProps> = ({ onIntroComplete }) => {
                   <div className="absolute inset-0 -translate-x-full hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-cyber-secondary/10 to-transparent" />
                   <Linkedin size={16} /> LINKEDIN
                 </motion.a>
-                <motion.a href="https://github.com/shreeya-methuku" target="_blank" rel="noreferrer"
+                <motion.a href={`https://${RESUME.profile.github}`} target="_blank" rel="noreferrer"
                   whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
                   className="relative flex items-center gap-2 overflow-hidden bg-gray-800/80 text-white px-7 py-3 rounded border border-gray-600 hover:bg-gray-700 hover:shadow-[0_0_24px_rgba(255,255,255,0.15)] transition-all text-sm tracking-wider"
                 >
                   <div className="absolute inset-0 -translate-x-full hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/5 to-transparent" />
                   <Github size={16} /> GITHUB
+                </motion.a>
+                <motion.a href="/resume.pdf" target="_blank" rel="noreferrer"
+                  whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+                  className="relative flex items-center gap-2 overflow-hidden bg-cyber-accent/10 text-cyber-accent px-7 py-3 rounded border border-cyber-accent/50 hover:bg-cyber-accent/20 hover:shadow-[0_0_24px_rgba(6,182,212,0.4)] transition-all text-sm tracking-wider"
+                >
+                  <div className="absolute inset-0 -translate-x-full hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-cyber-accent/10 to-transparent" />
+                  <FileText size={16} /> RESUME
                 </motion.a>
                 <motion.a href="https://mail.google.com/mail/?view=cm&to=ft.shreeyyymethuku@gmail.com" target="_blank" rel="noreferrer"
                   whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}

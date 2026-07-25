@@ -7,7 +7,6 @@ import { QuestLog } from './components/QuestLog';
 import { Inventory } from './components/Inventory';
 import { Education, Awards } from './components/Archives';
 import { Background3D } from './components/Background3D';
-import { BackgroundMusic } from './components/BackgroundMusic';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const App: React.FC = () => {
@@ -57,9 +56,6 @@ const App: React.FC = () => {
       
       {/* Scanline Animation */}
       <div className="fixed inset-0 z-[60] pointer-events-none opacity-[0.03] bg-gradient-to-b from-transparent via-white to-transparent h-1 w-full animate-scanline"></div>
-
-      {/* Ambient music toggle — always present */}
-      <BackgroundMusic />
 
       {/* BootSequence handles its own exit animation and calls onComplete only after fully invisible */}
       {!bootComplete && <BootSequence onComplete={handleBootComplete} />}
