@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, Variants, AnimatePresence } from 'framer-motion';
 import { RESUME } from '../constants';
-import { Github, Linkedin, MapPin, Zap, Trophy, Layers, FileText } from 'lucide-react';
+import { Github, Linkedin, MapPin, Zap, Trophy, Layers, FileText, Swords } from 'lucide-react';
 import { PixelCharacter } from './PixelCharacter';
 
 interface DashboardProps {
@@ -129,32 +129,39 @@ export const Dashboard: React.FC<DashboardProps> = ({ onIntroComplete }) => {
               </motion.div>
 
               <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.75}
-                className="relative z-[80] flex flex-wrap justify-center lg:justify-start gap-4 font-mono"
+                className="relative z-[80] flex flex-wrap justify-center lg:justify-start gap-3 font-mono"
               >
                 <motion.a href={`https://${RESUME.profile.linkedin}`} target="_blank" rel="noreferrer"
                   whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
-                  className="relative flex items-center gap-2 overflow-hidden bg-cyber-secondary/10 text-cyber-secondary px-7 py-3 rounded border border-cyber-secondary/50 hover:bg-cyber-secondary/20 hover:shadow-[0_0_24px_rgba(139,92,246,0.4)] transition-all text-sm tracking-wider"
+                  className="relative flex items-center gap-2 overflow-hidden bg-cyber-secondary/10 text-cyber-secondary px-4 py-2.5 rounded border border-cyber-secondary/50 hover:bg-cyber-secondary/20 hover:shadow-[0_0_24px_rgba(139,92,246,0.4)] transition-all text-sm tracking-wider"
                 >
                   <div className="absolute inset-0 -translate-x-full hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-cyber-secondary/10 to-transparent" />
                   <Linkedin size={16} /> LINKEDIN
                 </motion.a>
                 <motion.a href={`https://${RESUME.profile.github}`} target="_blank" rel="noreferrer"
                   whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
-                  className="relative flex items-center gap-2 overflow-hidden bg-gray-800/80 text-white px-7 py-3 rounded border border-gray-600 hover:bg-gray-700 hover:shadow-[0_0_24px_rgba(255,255,255,0.15)] transition-all text-sm tracking-wider"
+                  className="relative flex items-center gap-2 overflow-hidden bg-gray-800/80 text-white px-4 py-2.5 rounded border border-gray-600 hover:bg-gray-700 hover:shadow-[0_0_24px_rgba(255,255,255,0.15)] transition-all text-sm tracking-wider"
                 >
                   <div className="absolute inset-0 -translate-x-full hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/5 to-transparent" />
                   <Github size={16} /> GITHUB
                 </motion.a>
                 <motion.a href="/resume.pdf" target="_blank" rel="noreferrer"
                   whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
-                  className="relative flex items-center gap-2 overflow-hidden bg-cyber-accent/10 text-cyber-accent px-7 py-3 rounded border border-cyber-accent/50 hover:bg-cyber-accent/20 hover:shadow-[0_0_24px_rgba(6,182,212,0.4)] transition-all text-sm tracking-wider"
+                  className="relative flex items-center gap-2 overflow-hidden bg-cyber-accent/10 text-cyber-accent px-4 py-2.5 rounded border border-cyber-accent/50 hover:bg-cyber-accent/20 hover:shadow-[0_0_24px_rgba(6,182,212,0.4)] transition-all text-sm tracking-wider"
                 >
                   <div className="absolute inset-0 -translate-x-full hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-cyber-accent/10 to-transparent" />
                   <FileText size={16} /> RESUME
                 </motion.a>
+                <motion.a href="https://takeuforward.org/profile/echoignite" target="_blank" rel="noreferrer"
+                  whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+                  className="relative flex items-center gap-2 overflow-hidden bg-yellow-500/10 text-yellow-400 px-4 py-2.5 rounded border border-yellow-500/50 hover:bg-yellow-500/20 hover:shadow-[0_0_24px_rgba(234,179,8,0.4)] transition-all text-sm tracking-wider"
+                >
+                  <div className="absolute inset-0 -translate-x-full hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-yellow-500/10 to-transparent" />
+                  <Swords size={16} /> DSA
+                </motion.a>
                 <motion.a href="https://mail.google.com/mail/?view=cm&to=ft.shreeyyymethuku@gmail.com" target="_blank" rel="noreferrer"
                   whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
-                  className="relative flex items-center gap-2 overflow-hidden bg-cyber-primary/10 text-cyber-primary px-7 py-3 rounded border border-cyber-primary/50 hover:bg-cyber-primary/20 hover:shadow-[0_0_24px_rgba(16,185,129,0.4)] transition-all text-sm tracking-wider"
+                  className="relative flex items-center gap-2 overflow-hidden bg-cyber-primary/10 text-cyber-primary px-4 py-2.5 rounded border border-cyber-primary/50 hover:bg-cyber-primary/20 hover:shadow-[0_0_24px_rgba(16,185,129,0.4)] transition-all text-sm tracking-wider"
                 >
                   <div className="absolute inset-0 -translate-x-full hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-cyber-primary/10 to-transparent" />
                   ✉ CONTACT
